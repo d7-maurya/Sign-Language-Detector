@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISION-BASED SIGN LANGUAGE RECOGNITION SYSTEM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="brand">
+            <div class="logo-icon"><sign-logo class="svg"></sign-logo></div>
+            <div class="brand-text">
+                <h1>VISION-BASED SIGN LANGUAGE RECOGNITION SYSTEM</h1>
+                <p>Real-time Recognition System</p>
+            </div>
+        </div>
+        <div class="status-badge" id="cameraStatus">CAMERA INACTIVE</div>
+    </header>
+
+    <div class="container">
+        <div class="video-column">
+            <div class="video-wrapper">
+                <video id="video" autoplay playsinline muted></video>
+                <canvas id="canvas" style="display:none;"></canvas>
+                <div id="videoOverlay" class="video-overlay">
+                    <p>Camera is currently off</p>
+                </div>
+            </div>
+
+            <div class="controls-area">
+                <button id="startBtn" class="btn btn-dark">Start Camera</button>
+                <button id="stopBtn" class="btn btn-light" disabled>Stop</button>
+                <button id="captureBtn" class="btn btn-primary" disabled>Capture</button>
+                
+                <div style="display:none;">
+                    <input type="checkbox" id="autoToggle">
+                    <input type="checkbox" id="ttsToggle">
+                </div>
+            </div>
+        </div>
+
+        <aside class="dashboard-column">
+            
+            <div class="card result-card">
+                <div class="card-header">
+                    <h3>Prediction</h3>
+                    <span class="live-badge">Live</span>
+                </div>
+                <div class="prediction-main">
+                    <span id="prediction">-</span>
+                </div>
+                <div class="confidence-section">
+                    <div class="conf-labels">
+                        <span id="detectStatus">Waiting...</span>
+                        <span id="confPercent">0%</span>
+                    </div>
+                    <div class="progress-bg">
+                        <div id="confidenceFill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card history-card">
+                <div class="card-header">
+                    <h3>Recent</h3>
+                </div>
+                <div class="history-grid" id="historyList">
+                    </div>
+            </div>
+
+            <div class="card stats-card">
+                <div class="stat-item">
+                    <h4 id="statFrames">0</h4>
+                    <p>Frames</p>
+                </div>
+                <div class="stat-item border-left">
+                    <h4 id="statHands">0</h4>
+                    <p>Hands</p>
+                </div>
+                <div class="stat-item border-left">
+                    <h4 id="statAvg">0%</h4>
+                    <p>Avg Conf.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" id="clearHistory">Clear History</a>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
